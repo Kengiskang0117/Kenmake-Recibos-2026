@@ -83,9 +83,7 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--navy2);b
 .r-firma .linea{border-top:1.5px solid var(--texto);padding-top:4px;min-width:190px;font-size:12.5px;color:var(--suave)}
 .r-firma .linea b{display:block;color:var(--texto);font-size:14px}
 /* Sello rojo transparente con el logo. Para hacerlo más fuerte o más suave cambia opacity (0 a 1) */
-.r-totales{position:relative;margin-top:12px}
-.r-totales .r-sumas{margin-top:0}
-.sello-logo{position:absolute;left:44px;top:50%;width:130px;height:130px;margin-top:-65px;opacity:.38;transform:rotate(-13deg);pointer-events:none}
+.sello-logo{display:block;width:84px;height:84px;margin-top:10px;opacity:.45;transform:rotate(-13deg);pointer-events:none}
 .sello{border:2.5px solid var(--lima-osc);color:var(--lima-osc);border-radius:10px;padding:6px 12px;font-family:var(--display);font-size:22px;letter-spacing:.06em;transform:rotate(-6deg);line-height:1}
 .r-pie{background:var(--navy);color:#C9CCDA;padding:12px 26px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;font-size:12.5px}
 .r-pie b{color:var(--lima)}
@@ -94,7 +92,7 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--navy2);b
   .r-cab img{height:32px}
   .r-tit b{font-size:24px}
   .r-datos{grid-template-columns:1fr}
-  .sello-logo{width:92px;height:92px;margin-top:-46px;left:0}
+  .sello-logo{width:72px;height:72px}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
@@ -181,14 +179,11 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--navy2);b
           <thead><tr><th>Concepto</th><th>Importe</th></tr></thead>
           <tbody id="r-items"></tbody>
         </table>
-        <div class="r-totales">
-        <img class="sello-logo" id="r-sello-logo" alt="" hidden>
         <div class="r-sumas">
           <div><span>Total del trabajo</span><b id="r-total"></b></div>
           <div id="r-antes-fila"><span>Pagado antes</span><b id="r-antes"></b></div>
           <div class="este"><span id="r-tipo"></span><b id="r-monto"></b></div>
           <div class="saldo" id="r-saldo-fila"><span>Saldo pendiente</span><b id="r-saldo"></b></div>
-        </div>
         </div>
         <div class="r-pago">
           <span>Método: <b id="r-metodo"></b></span>
@@ -196,7 +191,7 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--navy2);b
         </div>
         <div class="r-nota" id="r-nota"></div>
         <div class="r-firma">
-          <div class="linea"><b id="r-firma"></b><span id="r-firma-neg"></span></div>
+          <div class="linea"><b id="r-firma"></b><span id="r-firma-neg"></span><img class="sello-logo" id="r-sello-logo" alt="" hidden></div>
           <div class="sello" id="r-sello">PAGADO</div>
         </div>
       </div>
