@@ -409,7 +409,21 @@ function nombreArchivo(){
 async function imagen(){
   if (!window.html2canvas) throw new Error("sin librería");
   await document.fonts.ready;
-  const lienzo = await html2canvas($("#recibo"), { scale: 2, backgroundColor: "#ffffff", useCORS: true });
+  /* La imagen sale siempre igual, desde celular o computadora:
+     el recibo a 600 px de ancho, con 48 px de margen y sombra suave alrededor */
+  const ANCHO = 600, MARGEN = 48, ESCALA = 2;
+  const rec = await html2canvas($("#recibo"), {
+    scale: ESCALA, backgroundColor: null, useCORS: true,
+    windowWidth: 1100,                       // usa el diseño de computadora aunque estés en el celular
+    onclone: doc => { const r = doc.getElementById("recibo"); r.style.width = ANCHO + "px"; r.style.maxWidth = ANCHO + "px"; r.style.boxShadow = "none"; }
+  });
+  const m = MARGEN * ESCALA;
+  const lienzo = document.createElement("canvas");
+  lienzo.width = rec.width + m * 2; lienzo.height = rec.height + m * 2;
+  const ctx = lienzo.getContext("2d");
+  ctx.fillStyle = "#ECEEF5"; ctx.fillRect(0, 0, lienzo.width, lienzo.height);   // fondo gris claro del margen
+  ctx.shadowColor = "rgba(13,15,28,.22)"; ctx.shadowBlur = 24 * ESCALA; ctx.shadowOffsetY = 8 * ESCALA;
+  ctx.drawImage(rec, m, m);
   return new Promise(r => lienzo.toBlob(r, "image/png"));
 }
 function marcarUsado(){
